@@ -29,3 +29,27 @@ leftMenu.addEventListener('click', event => {
         hamburger.classList.add('open');
     }
 });
+
+// tvCard
+
+const tvCard = document.querySelectorAll('img');
+
+tvCard.forEach((el) => {
+    const newSrc = el.getAttribute('data-backdrop');
+    const newSrc2 = el.getAttribute('src');
+
+    el.addEventListener('mouseover', event => {
+        const target = event.target;    
+        target.setAttribute('src', newSrc);
+    });
+    
+    el.addEventListener('mouseleave', event => {
+        const target = event.target;    
+        target.setAttribute('src', newSrc2);
+    });
+});
+
+
+
+
+
