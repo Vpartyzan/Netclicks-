@@ -19,15 +19,15 @@ const DBService = class {
         }
     }
 
-    getTestData = () => {
-        return this.getData('test.json');
+    getTestData = async () => {
+        return await this.getData('test.json');
     }
 };
 
 const renderCard = response => {
     tvShowList.textContent = '';
 
-    response.result.forEach(item => {
+    response.results.forEach(item => {
 
         const {
             backdrop_path: backdrop,
@@ -37,17 +37,17 @@ const renderCard = response => {
             } = item;
 
         const posterIMG = poster ? IMG_URL + poster : 'img/no-poster.jpg';
-        const backdropIMG = ''; // еслі нет backdrop то не добавляем нічего
-        const voteElem = ''; // если нет voteElem то не выводим span TV-card__vote
+        const backdropIMG = backdrop ? IMG_URL + backdrop : posterIMG; 
+        const voteElem = vote ? `<span class="tv-card__vote">${vote}</span>` : ''; // если нет voteElem то не выводим span TV-card__vote
 
         const card = document.createElement('li');
-        card.cclassName = 'tv-shows__item';
+        card.className = 'tv-shows__item';
         card.innerHTML = `
               <a href="#" class="tv-card">
-                <span class="tv-card__vote">${vote}</span>
+                ${voteElem}
                 <img class="tv-card__img"
                     src="${posterIMG}"
-                    data-backdrop="${IMG_URL + backdrop}"
+                    data-backdrop="${backdropIMG}"
                     alt="${title}">
                 <h4 class="tv-card__head">${title}</h4>
               </a>
